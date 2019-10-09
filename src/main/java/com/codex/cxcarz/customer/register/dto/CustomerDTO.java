@@ -20,24 +20,35 @@ public class CustomerDTO implements Serializable {
 	public CustomerDTO() {
 		logger.debug("Object created for " + this.getClass().getSimpleName());
 	}
-    @Id
     @GenericGenerator(name = "customerId" ,strategy = "increment")
+    @Id
     @GeneratedValue(generator = "customerId")
 	private Integer customerId;
-	private String firstName;
-	private String lastName;
 	private String emailId;
-	private Long phoneNumber;
-	private String dateOfBirth;
 	private String userName;
 	private String password;
 	private String uuid;
+	private boolean isAdmin;
+	public boolean isAdmin() {
+		return isAdmin;
+	}
 
-	@Override
-	public String toString() {
-		return "CustomerDTO [customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", emailId=" + emailId + ", phoneNumber=" + phoneNumber + ", dateOfBirth=" + dateOfBirth
-				+ ", userName=" + userName + ", password=" + password + ", uuid=" + uuid + "]";
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+	
+	private String gender;
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public static Logger getLogger() {
+		return logger;
 	}
 
 	public Integer getCustomerId() {
@@ -48,21 +59,9 @@ public class CustomerDTO implements Serializable {
 		this.customerId = customerId;
 	}
 
-	public String getFirstName() {
-		return firstName;
-	}
+	
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+	
 
 	public String getEmailId() {
 		return emailId;
@@ -72,21 +71,6 @@ public class CustomerDTO implements Serializable {
 		this.emailId = emailId;
 	}
 
-	public Long getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(Long phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	public String getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-	public void setDateOfBirth(String dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
 
 	public String getUserName() {
 		return userName;

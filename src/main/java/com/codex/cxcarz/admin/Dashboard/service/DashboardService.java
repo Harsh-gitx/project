@@ -5,6 +5,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.codex.cxcarz.admin.Dashboard.DTO.CarDTO;
 import com.codex.cxcarz.admin.Dashboard.repository.DashboardRepository;
 import com.codex.cxcarz.customer.Rides.DTO.RideDTO;
 
@@ -22,6 +23,12 @@ public class DashboardService {
 	public void assignRideToDriver(RideDTO dto) {
 
 		repo.assignRideToDriver(dto);
+	}
+
+	public boolean createCar(CarDTO dto) {
+			repo.createCar(dto);
+		return true;
+		
 	}
 	
 }

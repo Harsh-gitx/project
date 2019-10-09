@@ -207,12 +207,26 @@
 			<artifactId>spring-orm</artifactId>
 			<version>5.1.4.RELEASE</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.ebaysf.web/cors-filter -->
+<dependency>
+    <groupId>org.ebaysf.web</groupId>
+    <artifactId>cors-filter</artifactId>
+    <version>1.0.1</version>
+</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
 			<version>5.1.4.RELEASE</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+<dependency>
+    <groupId>javax.mail</groupId>
+    <artifactId>mail</artifactId>
+    <version>1.4.7</version>
+</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>

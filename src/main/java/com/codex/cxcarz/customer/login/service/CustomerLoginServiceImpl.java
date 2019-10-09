@@ -25,7 +25,7 @@ public class CustomerLoginServiceImpl implements CustomerLoginService {
 	private CustomerLoginRepository repository;
 
 
-	public boolean checkLogin(CustomerDTO dto) {
+	public CustomerDTO checkLogin(CustomerDTO dto) {
 		return repository.checkLogin(dto);
 	}
 

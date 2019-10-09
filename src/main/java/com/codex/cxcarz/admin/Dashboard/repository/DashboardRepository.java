@@ -11,6 +11,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.codex.cxcarz.admin.Dashboard.DTO.CarDTO;
 import com.codex.cxcarz.admin.Dashboard.DTO.DashboardDTO;
 import com.codex.cxcarz.customer.Rides.DTO.RideDTO;
 import com.codex.cxcarz.driver.register.dto.DriverDTO;
@@ -46,5 +47,12 @@ public class DashboardRepository {
 		}
 
 		// TODO Auto-generated method stub
+	}
+
+	public boolean createCar(CarDTO dto) {
+		Session sess=sf.openSession();
+		sess.save(dto);
+		sess.beginTransaction().commit();
+		return true;
 	}
 }

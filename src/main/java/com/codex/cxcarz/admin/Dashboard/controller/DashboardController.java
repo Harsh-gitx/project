@@ -5,10 +5,12 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.codex.cxcarz.admin.Dashboard.DTO.CarDTO;
 import com.codex.cxcarz.admin.Dashboard.service.DashboardService;
 import com.codex.cxcarz.customer.Rides.DTO.RideDTO;
 
@@ -28,4 +30,14 @@ public class DashboardController {
 		service.assignRideToDriver(dto);
 		return true;
 	}
+	@RequestMapping(value="/createCar.do",method=RequestMethod.POST)
+	public boolean createCars(@RequestBody CarDTO dto) {
+		System.out.println(dto.getName());
+		System.out.println(dto.getPrice());
+		System.out.println(dto.getYear());
+		
+		service.createCar(dto);
+		return true;
+	}
+	
 }

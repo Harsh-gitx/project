@@ -44,18 +44,22 @@ public class CustomerLoginRepositoryImpl implements CustomerLoginRepository {
 
 
 	@Override
-	public boolean checkLogin(CustomerDTO dto) {
+	public CustomerDTO checkLogin(CustomerDTO dto) {
+		System.out.println(dto.getEmailId());
+		System.out.println(dto.getPassword());
 	Session sess=factory.openSession();
 	Criteria crit=sess.createCriteria(CustomerDTO.class);
-	Criterion criterion1=Restrictions.eq("email", dto.getEmailId());
+	Criterion criterion1=Restrictions.eq("emailId", dto.getEmailId());
 	Criterion criterion2=Restrictions.eq("password", dto.getPassword());
 	crit.add(criterion1);
 	crit.add(criterion2);
 	
 	CustomerDTO customer=(CustomerDTO)crit.uniqueResult();
+//	System.out.println(customer.getEmailId());
+	//System.out.println(customer.isAdmin());
 	if(customer!=null)
-		return true;
+		return customer;
 		// TODO Auto-generated method stub
-    return false;
+    return null;
 	}
 }

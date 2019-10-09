@@ -39,6 +39,7 @@
       <value>com.codex.cxcarz.driver.register.dto.DriverDTO</value>
       <value>com.codex.cxcarz.customer.Rides.DTO.RideDTO</value>
       <value>com.codex.cxcarz.admin.Dashboard.DTO.DashboardDTO</value>
+      <value>com.codex.cxcarz.admin.Dashboard.DTO.CarDTO</value>
       
       
       </list>
@@ -65,8 +66,8 @@
 		<!-- SMTP settings -->
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
-		<property name="username" value="naveenkashyapr05@gmail.com" />
-		<property name="password" value="8762014707rnk" />
+		<property name="username" value="harshagowda994@gmail.com" />
+		<property name="password" value="P@ssword@1234" />
 
 		<property name="javaMailProperties">
 			<!-- additional properties specific to JavaMail -->

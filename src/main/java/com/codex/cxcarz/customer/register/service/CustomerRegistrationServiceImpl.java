@@ -1,6 +1,7 @@
 package com.codex.cxcarz.customer.register.service;
 
 import java.util.Objects;
+
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -18,30 +19,36 @@ import com.codex.cxcarz.customer.register.repository.CustomerRegisterRepository;
 public class CustomerRegistrationServiceImpl implements CustomerRegistrationService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CustomerRegistrationServiceImpl.class);
-
+	
 	@Autowired
-	private CustomerRegisterRepository repository;
-
+	private CustomerRegisterRepository rep;
+//	@Autowired
+//	private CustomerRegisterRepository repositrory;
+//	
+//	@Autowired
+//	private CustomerRegisterRepository repo;
 	//@Autowired
 	private JavaMailSender mailSender;
 
 	public CustomerDTO preSave(CustomerDTO dto) throws Exception {
 		try {
 			LOGGER.debug("Entering preSave method " + dto);
-			if (!StringUtils.isEmpty(dto.getEmailId()) && !StringUtils.isEmpty(dto.getFirstName())
-					&& !StringUtils.isEmpty(dto.getLastName())) {
+			if (!StringUtils.isEmpty(dto.getEmailId()) ) {
 				LOGGER.debug("Completed validation for String types");
-				CustomerDTO dtoPresent = repository.searchByMailId(dto.getEmailId());
+				CustomerDTO dtoPresent = rep.searchByMailId(dto.getEmailId());
 				if (dtoPresent != null) {
 					repeatSendMail(dtoPresent);
 					return null;
+				}else {
+					if(!dto.isAdmin())
+						{
+							successSendMail(dto);
+						}
 				}
-				if (Objects.nonNull(dto.getPhoneNumber()) && Objects.nonNull(dto.getDateOfBirth())) {
-
-					LOGGER.debug("Completed validation for non-String types");
+				
 					return dto;
 
-				}
+				
 
 			}
 		} catch (Exception e) {
@@ -54,14 +61,16 @@ public class CustomerRegistrationServiceImpl implements CustomerRegistrationServ
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		mailMessage.setTo(dtoPresent.getEmailId());
 		mailMessage.setSubject("Repeated Registration");
-		mailMessage.setText("Hi " + dtoPresent.getFirstName() + "" + dtoPresent.getLastName() + ""
+		mailMessage.setText("Hi " + dtoPresent.getUserName() + ""
 				+ "you have already successfully registered for cxcarz" + "." + "So you cannot register again");
 	}
 
 	public CustomerDTO save(CustomerDTO dto) {
 		dto.setUuid(UUID.randomUUID().toString());
-		CustomerDTO dtoAfterSave = repository.save(dto);
+		CustomerDTO dtoAfterSave = rep.save(dto);
+		System.out.println("Inside save"+dtoAfterSave.getEmailId());
 		if (dtoAfterSave != null) {
+			
 			successSendMail(dtoAfterSave);
 			return dtoAfterSave;
 		}
@@ -74,7 +83,7 @@ public class CustomerRegistrationServiceImpl implements CustomerRegistrationServ
 			SimpleMailMessage mailMessage = new SimpleMailMessage();
 			mailMessage.setTo(dtoAfterSave.getEmailId());
 			mailMessage.setSubject("Registration Confirmation mail");
-			mailMessage.setText("Hi " + dtoAfterSave.getFirstName() + " " + dtoAfterSave.getLastName()
+			mailMessage.setText("Hi " + dtoAfterSave.getUserName()  
 					+ "you have successfully registered for cx carz. The username: " + dtoAfterSave.getUserName()
 					+ "and password: " + dtoAfterSave.getPassword()
 					+ " for future communication. Please do click on activation link http://localhost:8080/cxcarz/activateLink?uoid="
@@ -91,7 +100,7 @@ public class CustomerRegistrationServiceImpl implements CustomerRegistrationServ
 	    try {
 			if (!StringUtils.isEmpty(uoid)) {
 				LOGGER.debug("Validation completed");
-				 CustomerDTO dto= repository.getByUOID(uoid);
+				 CustomerDTO dto= rep.getByUOID(uoid);
 				 if(dto!=null) {
 					 return dto;
 				 }

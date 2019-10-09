@@ -21,8 +21,9 @@ public class LoginController {
 	
 	@RequestMapping(value="/loginUser.do",method=RequestMethod.POST)
 	public ResponseEntity<CustomerDTO> loginUser(@RequestBody CustomerDTO dto) {
-			if(service.checkLogin(dto)) {
-				return new ResponseEntity<CustomerDTO>(dto,HttpStatus.OK);
+		CustomerDTO cust=service.checkLogin(dto);
+			if(cust!=null) {
+				return new ResponseEntity<CustomerDTO>(cust,HttpStatus.OK);
 			}
 		return null;
 	}

@@ -6,5 +6,5 @@ public interface CustomerLoginRepository {
 
 
 
-	boolean checkLogin(CustomerDTO dto);
+	CustomerDTO checkLogin(CustomerDTO dto);
 }
